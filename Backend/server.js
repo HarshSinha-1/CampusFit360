@@ -10,13 +10,13 @@ app.use(express.json());
 const studentRouter = require('./routes/studentRouter');
 const AdminRouter = require('./routes/AdminRouter');
 const trainerRouter = require('./routes/trainerRouter');
+const GymRouter = require('./routes/GymRouter')
 
  
-
-
 app.use("/student",studentRouter);
 app.use("/admin",AdminRouter);
 app.use("/trainer",trainerRouter);
+app.use("/gym",GymRouter);
 
 const connectWithRetry = async () => {
   try {

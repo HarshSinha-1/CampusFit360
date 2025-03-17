@@ -8,6 +8,7 @@ const StudentSchema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     fitnessLevel: { type: Number, min: 1, max: 10, required: true },
+
 });
 
 const AdminSchema = new Schema({
@@ -18,9 +19,13 @@ const AdminSchema = new Schema({
 
 const GymSchema = new Schema({
     gymId: { type: Number, required: true },
-    location: { type: String, required: true },
-    capacity: { type: Number, required: true },
-    equipments: { type: [String], required: true },
+    location: { type: String},
+    capacity: { type: Number},
+    equipments: { type: [String]},
+    slots : [{
+        time : { type: String , required: true },
+        availability : {type : Number}
+    }]
 });
 
 const TrainerSchema = new Schema({
@@ -32,14 +37,29 @@ const TrainerSchema = new Schema({
     specialization: { type: String, required: true },
 });
 
+const BookingSchema = new Schema({
+    studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
+    gymId: { type: mongoose.Schema.Types.ObjectId, ref: 'Gym', required: true },
+    BookingDate: { type: Date, required: true },
+    timeSlot: { type: String, required: true }, // e.g., '10:00-11:00 AM'
+    equipment: { type: String }, 
+    status: { 
+        type: String,
+        enum: ['confirmed', 'canceled', 'completed'],
+        default: 'confirmed'
+    }
+});
+
 const StudentModel = mongoose.model('Student', StudentSchema);
 const AdminModel = mongoose.model('Admin', AdminSchema);
 const GymModel = mongoose.model('Gym', GymSchema);
 const TrainerModel = mongoose.model('Trainer', TrainerSchema);
+const BookingModel = mongoose.model('Booking',BookingSchema);
 
 module.exports = {
     StudentModel,
     AdminModel,
     GymModel,
-    TrainerModel
+    TrainerModel,
+    BookingModel
 };

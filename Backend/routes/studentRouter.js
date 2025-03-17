@@ -51,7 +51,9 @@ studentRouter.post('/signin',async(req,res)=>{
         const ismatch = await bcrypt.compare(password,student.password);
 
         if(student && ismatch){
-            const token =  await jwt.sign({studentId : student._id},JWT_USER_PASSWORD,{expiresIn : '1h'});
+            const token =  await jwt.sign({studentId : student._id, name : student.name}
+                ,JWT_USER_PASSWORD,
+                {expiresIn : '1h'});
             if(!token){
                 res.status(400).json({
                     message : "Failed to generate token"
