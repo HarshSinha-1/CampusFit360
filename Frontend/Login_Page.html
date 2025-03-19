@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusFit 360 - Login/Register</title>
+    <link rel="stylesheet" href="style_login.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">CampusFit 360</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Features</a>
+            <a href="#">Trainers</a>
+            <a href="#">Community</a>
+            <a href="#">About</a>
+        </div>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <div class="toggle-container">
+            <button class="toggle-btn" id="toggleBtn">Switch to Register</button>
+        </div>
+        
+        <div class="form-container">
+            <div class="form-inner slide-left" id="formInner">
+                <!-- Login Form -->
+                <div class="login-form">
+                    <h2 class="form-title">Login to Your Account</h2>
+                    
+                    <div class="input-group">
+                        <label for="loginType">Login As</label>
+                        <select id="loginType">
+                            <option value="student">Student Login</option>
+                            <option value="trainer">Trainer Login</option>
+                            <option value="admin">Admin Login</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="Enter your password">
+                    </div>
+                    
+                    <button class="btn">Login</button>
+                </div>
+                
+                <!-- Register Form -->
+                <div class="register-form">
+                    <h2 class="form-title">Create Your Account</h2>
+                    
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="regName">Full Name</label>
+                            <input type="text" id="regName" placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="regAge">Age</label>
+                            <input type="number" id="regAge" placeholder="Enter your age">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="regGender">Gender</label>
+                        <select id="regGender">
+                            <option value="">Select gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="regEmail">Email</label>
+                        <input type="email" id="regEmail" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="regPassword">Password</label>
+                        <input type="password" id="regPassword" placeholder="Create a password">
+                    </div>
+                    
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="regHeight">Height (cm)</label>
+                            <input type="number" id="regHeight" placeholder="Enter your height">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="regWeight">Weight (kg)</label>
+                            <input type="number" id="regWeight" placeholder="Enter your weight">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="regFitnessLevel">Fitness Level</label>
+                        <select id="regFitnessLevel">
+                            <option value="">Select fitness level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="regGymExperience">Gym Experience</label>
+                        <select id="regGymExperience">
+                            <option value="">Select gym experience</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const formInner = document.getElementById('formInner');
+        let isLoginActive = true;
+        
+        toggleBtn.addEventListener('click', () => {
+            if (isLoginActive) {
+                formInner.classList.remove('slide-left');
+                formInner.classList.add('slide-right');
+                toggleBtn.textContent = 'Switch to Login';
+            } else {
+                formInner.classList.remove('slide-right');
+                formInner.classList.add('slide-left');
+                toggleBtn.textContent = 'Switch to Register';
+            }
+            isLoginActive = !isLoginActive;
+        });
+    </script>
+</body>
+</html>
