@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness App Profile</title>
+    <link rel="stylesheet" href="Styles_ProfilePage.css">
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-picture-container">
+                <img src="/api/placeholder/400/400" alt="Profile Picture" class="profile-picture" id="profilePicture">
+                <label for="fileInput" class="profile-picture-edit">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                        <circle cx="12" cy="13" r="4"></circle>
+                    </svg>
+                </label>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            <h1>My Profile</h1>
+        </div>
+        
+        <div class="profile-content">
+            <div class="profile-info">
+                <div class="info-group">
+                    <div class="info-label">Name</div>
+                    <div class="info-value" id="nameValue">John Doe</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Age</div>
+                    <div class="info-value" id="ageValue">28</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Height</div>
+                    <div class="info-value" id="heightValue">180 cm</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Weight</div>
+                    <div class="info-value" id="weightValue">75 kg</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Gender</div>
+                    <div class="info-value" id="genderValue">Male</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Email</div>
+                    <div class="info-value" id="emailValue">john.doe@example.com</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">Experience</div>
+                    <div class="info-value" id="experienceValue">Intermediate</div>
+                </div>
+            </div>
+            
+            <button class="edit-button" id="editButton">Edit Profile</button>
+        </div>
+    </div>
+    
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2 style="margin-bottom: 20px;">Edit Profile</h2>
+            
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" min="1" max="120" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" min="50" max="250" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" min="20" max="300" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">Gym Experience</label>
+                    <select id="experience" required>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-button" id="cancelButton">Cancel</button>
+                    <button type="submit" class="save-button">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Sample profile data
+        let profileData = {
+            name: "John Doe",
+            age: 28,
+            height: 180,
+            weight: 75,
+            gender: "Male",
+            email: "john.doe@example.com",
+            experience: "Intermediate"
+        };
+        
+        // DOM elements
+        const editButton = document.getElementById('editButton');
+        const editModal = document.getElementById('editModal');
+        const closeModal = document.getElementById('closeModal');
+        const cancelButton = document.getElementById('cancelButton');
+        const profileForm = document.getElementById('profileForm');
+        const fileInput = document.getElementById('fileInput');
+        const profilePicture = document.getElementById('profilePicture');
+        
+        // Open modal with current profile data
+        editButton.addEventListener('click', function() {
+            // Populate form with current data
+            document.getElementById('name').value = profileData.name;
+            document.getElementById('age').value = profileData.age;
+            document.getElementById('height').value = profileData.height;
+            document.getElementById('weight').value = profileData.weight;
+            document.getElementById('gender').value = profileData.gender;
+            document.getElementById('email').value = profileData.email;
+            document.getElementById('experience').value = profileData.experience;
+            
+            // Show modal
+            editModal.style.display = 'block';
+        });
+        
+        // Close modal
+        function closeModalFunction() {
+            editModal.style.display = 'none';
+        }
+        
+        closeModal.addEventListener('click', closeModalFunction);
+        cancelButton.addEventListener('click', closeModalFunction);
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === editModal) {
+                closeModalFunction();
+            }
+        });
+        
+        // Handle form submission
+        profileForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Update profile data
+            profileData = {
+                name: document.getElementById('name').value,
+                age: parseInt(document.getElementById('age').value),
+                height: parseInt(document.getElementById('height').value),
+                weight: parseInt(document.getElementById('weight').value),
+                gender: document.getElementById('gender').value,
+                email: document.getElementById('email').value,
+                experience: document.getElementById('experience').value
+            };
+            
+            // Update UI
+            document.getElementById('nameValue').textContent = profileData.name;
+            document.getElementById('ageValue').textContent = profileData.age;
+            document.getElementById('heightValue').textContent = profileData.height + ' cm';
+            document.getElementById('weightValue').textContent = profileData.weight + ' kg';
+            document.getElementById('genderValue').textContent = profileData.gender;
+            document.getElementById('emailValue').textContent = profileData.email;
+            document.getElementById('experienceValue').textContent = profileData.experience;
+            
+            // Close modal
+            closeModalFunction();
+        });
+        
+        // Handle profile picture change
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePicture.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

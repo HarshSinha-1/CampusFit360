@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Dashboard - CampusFit 360</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="styles_HealthStats.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1>CampusFit 360</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Trainers</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+        <!-- <div class="auth-buttons">
+            <button class="login-btn">Login</button>
+            <button class="register-btn">Register</button>
+        </div> -->
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Your Health Dashboard</h2>
+            <p>Track your fitness progress with real-time data from your fitness band</p>
+        </section>
+
+        <section class="dashboard-container">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <img src="/api/placeholder/80/80" alt="Heart Rate Icon" class="feature-icon">
+                    </div>
+                    <h3>Heart Rate Analysis</h3>
+                </div>
+                <div class="card-content">
+                    <div class="stat-summary">
+                        <div class="stat-box">
+                            <span class="stat-value">72</span>
+                            <span class="stat-label">Resting BPM</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">142</span>
+                            <span class="stat-label">Max BPM Today</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">35</span>
+                            <span class="stat-label">Min in Zone</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="heartRateChart"></canvas>
+                    </div>
+                </div>
+                <!-- <div class="card-footer">
+                    <button class="action-btn">View Details</button>
+                </div> -->
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <img src="/api/placeholder/80/80" alt="Sleep Icon" class="feature-icon">
+                    </div>
+                    <h3>Sleep Patterns</h3>
+                </div>
+                <div class="card-content">
+                    <div class="stat-summary">
+                        <div class="stat-box">
+                            <span class="stat-value">7.5</span>
+                            <span class="stat-label">Hours</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">92%</span>
+                            <span class="stat-label">Efficiency</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">1.2</span>
+                            <span class="stat-label">Deep Sleep</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="sleepChart"></canvas>
+                    </div>
+                </div>
+                <!-- <div class="card-footer">
+                    <button class="action-btn">View Details</button>
+                </div> -->
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <img src="/api/placeholder/80/80" alt="Activity Icon" class="feature-icon">
+                    </div>
+                    <h3>Daily Activity</h3>
+                </div>
+                <div class="card-content">
+                    <div class="stat-summary">
+                        <div class="stat-box">
+                            <span class="stat-value">8,245</span>
+                            <span class="stat-label">Steps</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">3.2</span>
+                            <span class="stat-label">Miles</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-value">2,450</span>
+                            <span class="stat-label">Calories</span>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+                <!-- <div class="card-footer">
+                    <button class="action-btn">View Details</button>
+                </div> -->
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <img src="/api/placeholder/80/80" alt="Workout Icon" class="feature-icon">
+                    </div>
+                    <h3>Recent Workouts</h3>
+                </div>
+                <div class="card-content">
+                    <div class="workout-list">
+                        <div class="workout-item">
+                            <div class="workout-info">
+                                <h4>Morning Run</h4>
+                                <p>Today, 6:30 AM | 32 mins</p>
+                            </div>
+                            <div class="workout-stats">
+                                <span>3.2 miles</span>
+                                <span>Avg HR: 142 BPM</span>
+                            </div>
+                        </div>
+                        <div class="workout-item">
+                            <div class="workout-info">
+                                <h4>Strength Training</h4>
+                                <p>Yesterday, 5:15 PM | 45 mins</p>
+                            </div>
+                            <div class="workout-stats">
+                                <span>4 sets</span>
+                                <span>Avg HR: 128 BPM</span>
+                            </div>
+                        </div>
+                        <div class="workout-item">
+                            <div class="workout-info">
+                                <h4>Yoga Session</h4>
+                                <p>Mar 17, 7:00 AM | 60 mins</p>
+                            </div>
+                            <div class="workout-stats">
+                                <span>Mindfulness</span>
+                                <span>Avg HR: 85 BPM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-footer">
+                    <button class="action-btn">View All Workouts</button>
+                </div> -->
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <img src="/api/placeholder/80/80" alt="Progress Icon" class="feature-icon">
+                    </div>
+                    <h3>Weekly Progress</h3>
+                </div>
+                <div class="card-content">
+                    <div class="progress-container">
+                        <div class="progress-item">
+                            <div class="progress-label">Steps Goal</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                            <div class="progress-value">85%</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Active Minutes</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 72%;"></div>
+                            </div>
+                            <div class="progress-value">72%</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Sleep Quality</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 92%;"></div>
+                            </div>
+                            <div class="progress-value">92%</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Workout Frequency</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                            <div class="progress-value">60%</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card-footer">
+                    <button class="action-btn">View Full Report</button>
+                </div> -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3>CampusFit 360</h3>
+                <p>Your complete fitness solution</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#">Workout Plans</a></li>
+                        <li><a href="#">Nutrition</a></li>
+                        <li><a href="#">Health Tracking</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CampusFit 360. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Heart Rate Chart
+            const heartRateCtx = document.getElementById('heartRateChart').getContext('2d');
+            const heartRateChart = new Chart(heartRateCtx, {
+                type: 'line',
+                data: {
+                    labels: ['6:00 AM', '8:00 AM', '10:00 AM', '12:00 PM', '2:00 PM', '4:00 PM', '6:00 PM'],
+                    datasets: [{
+                        label: 'Heart Rate (BPM)',
+                        data: [72, 110, 145, 90, 82, 120, 95],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointBackgroundColor: 'rgba(75, 192, 192, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 60,
+                            max: 180
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Sleep Chart
+            const sleepCtx = document.getElementById('sleepChart').getContext('2d');
+            const sleepChart = new Chart(sleepCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [
+                        {
+                            label: 'Deep Sleep',
+                            data: [1.5, 1.2, 1.8, 1.3, 1.0, 2.0, 1.5],
+                            backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Light Sleep',
+                            data: [4.5, 4.8, 4.2, 4.7, 4.5, 4.0, 4.5],
+                            backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'REM Sleep',
+                            data: [1.5, 1.0, 1.3, 1.5, 1.2, 1.5, 1.8],
+                            backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                            stack: 'Stack 0'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: 'Hours'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Activity Chart
+            const activityCtx = document.getElementById('activityChart').getContext('2d');
+            const activityChart = new Chart(activityCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Steps',
+                        data: [7500, 9200, 8000, 10500, 6800, 12000, 8245],
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        yAxisID: 'y',
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Steps'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            // Simulate data from fitness band
+            function simulateRealtimeData() {
+                // Update heart rate data
+                const currentHeartRate = heartRateChart.data.datasets[0].data;
+                const newHr = Math.floor(Math.random() * 20) + 70;
+                currentHeartRate.shift();
+                currentHeartRate.push(newHr);
+                heartRateChart.update();
+                
+                // Update stats
+                document.querySelector('.stat-box:nth-child(2) .stat-value').textContent = 
+                    Math.max(...currentHeartRate);
+                
+                setTimeout(simulateRealtimeData, 5000);
+            }
+            
+            // Start simulation
+            simulateRealtimeData();
+        });
+
+        // Handle synchronization with fitness band
+        function syncWithFitnessBand() {
+            // This would be replaced with actual API calls to a fitness band service
+            console.log("Syncing with fitness band...");
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    console.log("Sync complete");
+                    resolve({
+                        success: true,
+                        lastSync: new Date().toLocaleString()
+                    });
+                }, 2000);
+            });
+        }
+
+        // Function to fetch and process health data
+        async function fetchHealthData() {
+            try {
+                // This would be real API calls in production
+                const result = await syncWithFitnessBand();
+                if (result.success) {
+                    // Update UI with last sync time
+                    console.log(`Last synced: ${result.lastSync}`);
+                    // Process and display the data
+                    // This is handled by the chart update functions above
+                }
+            } catch (error) {
+                console.error("Error syncing with fitness band:", error);
+            }
+        }
+
+        // Initial data fetch
+        fetchHealthData();
+    </script>
+</body>
+</html>
