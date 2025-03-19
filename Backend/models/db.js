@@ -8,6 +8,7 @@ const StudentSchema = new Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     fitnessLevel: { type: Number, min: 1, max: 10, required: true },
+    weight : { type: Number, required: true },
 
 });
 
@@ -50,16 +51,30 @@ const BookingSchema = new Schema({
     }
 });
 
+const workoutSchema = new Schema({
+    studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true, unique: true },
+    workoutPlan :{ type : String, required: true }
+});
+
+const nutritionSchema = new Schema({
+    studentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true},
+    nutritionPlan :{ type : String, required: true }
+});
+
 const StudentModel = mongoose.model('Student', StudentSchema);
 const AdminModel = mongoose.model('Admin', AdminSchema);
 const GymModel = mongoose.model('Gym', GymSchema);
 const TrainerModel = mongoose.model('Trainer', TrainerSchema);
 const BookingModel = mongoose.model('Booking',BookingSchema);
+const WorkoutModel = mongoose.model('Workout',workoutSchema);
+const NutritionModel = mongoose.model('Nutrition',nutritionSchema);
 
 module.exports = {
     StudentModel,
     AdminModel,
     GymModel,
     TrainerModel,
-    BookingModel
+    BookingModel,
+    WorkoutModel,
+    NutritionModel
 };

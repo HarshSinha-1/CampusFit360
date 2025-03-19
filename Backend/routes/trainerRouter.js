@@ -2,6 +2,7 @@ const Router = require('express');
 const { TrainerModel } = require('../models/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const studentmiddleware = require('../middlewares/StudentMiddleware');
 const JWT_USER_PASSWORD = require('../configs/configs').JWT_USER_PASSWORD;
 
 const trainerRouter = Router();
@@ -91,5 +92,24 @@ trainerRouter.post('/signin', async (req, res) => {
         });
     }
 });
+
+trainerRouter.get("/preview", async (req,res)=>{
+    try {
+        const trainers = await TrainerModel.find({}).populate('trainerId','name','gender','specialization');
+
+        if (!trainers || trainers.length === 0) {
+            return res.status(404).json({ message: "No gyms found" });
+        }
+
+        return res.status(200).json({
+            message: "All available gyms",
+            trainers
+        });
+
+    } catch (error) {
+        return res.status(500).json({ message: "Error fetching Trainers", error: error.message });
+    }
+})
+
 
 module.exports = trainerRouter;

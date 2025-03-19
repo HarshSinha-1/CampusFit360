@@ -8,7 +8,7 @@ const studentRouter = Router();
 
 studentRouter.post('/register',async(req,res)=>{
     try{
-        const {name,age,gender,email,password,fitnessLevel}=req.body;
+        const {name,age,gender,email,password,fitnessLevel,weight}=req.body;
         const hashpwd = await bcrypt.hashSync(password,10);
 
         const student = await StudentModel.create({
@@ -17,7 +17,8 @@ studentRouter.post('/register',async(req,res)=>{
             gender,
             email,
             password : hashpwd,
-            fitnessLevel
+            fitnessLevel,
+            weight
         });
         if(!student){
             res.status(400).json({
@@ -27,6 +28,7 @@ studentRouter.post('/register',async(req,res)=>{
         res.status(201).json({
             message : "Student Registered Successfully"
         });
+        console.log("new student registered");
     }catch(error){
         res.status(500).json({ 
             message : "Internal Server Error",
@@ -63,6 +65,7 @@ studentRouter.post('/signin',async(req,res)=>{
                 message : "Student Signed In Successfully",
                 token : token
                 });
+            console.log("Student_Signin");
         }else{
             res.status(400).json({
             message : "Invalid Password"
